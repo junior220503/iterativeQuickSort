@@ -1,0 +1,32 @@
+# Nome do compilador
+CC = gcc
+
+# Flags de compilação
+CFLAGS = -Wall -Wextra
+
+# Nome do executável
+TARGET = quicksort
+
+# Lista de arquivos objeto
+OBJ = main.o quicksort.o
+
+# Regra padrão para compilar o projeto
+all: $(TARGET)
+
+# Regra para gerar o executável
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+
+# Regra para compilar o main.c
+main.o: main.c quicksort.h
+	$(CC) $(CFLAGS) -c main.c
+
+# Regra para compilar o quicksort.c
+quicksort.o: quicksort.c quicksort.h
+	$(CC) $(CFLAGS) -c quicksort.c
+
+# Limpar arquivos objeto e executável
+clean:
+	rm -f $(TARGET) $(OBJ)
+
+.PHONY: all clean
